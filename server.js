@@ -30,6 +30,7 @@ app.get("/fruits/new", (req, res) => {
 
 //Delete
 //Update
+
 //Create
 app.post("/fruits", (req, res) => {
   if (req.body.readyToEat === "on") {
@@ -51,6 +52,23 @@ app.get("/fruits/:indexOfFruitsArray", (req, res) => {
     //second param must be an object
     fruit: fruits[req.params.indexOfFruitsArray], //there will be a variable available inside the ejs file called fruit, its value is fruits[req.params.indexOfFruitsArray]
   }); // renders the info using the appropriate template
+});
+
+//New - get the form to add a new vegetable
+app.get("/vegetables/new", (req, res) => {
+  res.render("vegetables/New");
+});
+
+app.post("/vegetables", (req, res) => {
+  if (req.body.readyToEat === "on") {
+    //if checked, req.body.readyToEat is set to 'on'
+    req.body.readyToEat = true; //do some data correction
+  } else {
+    //if not checked, req.body.readyToEat is undefined
+    req.body.readyToEat = false; //do some data correction
+  }
+  vegetables.push(req.body);
+  res.redirect("/vegetables"); //send the user back to /fruits
 });
 
 app.get("/vegetables/", (req, res) => {
