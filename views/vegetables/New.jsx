@@ -4,8 +4,7 @@ class New extends React.Component {
   render() {
     return (
       <div>
-        <h1>New Vegetable page</h1>
-        {/* NOTE: action will be the route, method will be the HTTP verb */}
+        <h1>New Vegetable Page</h1>
         <form action="/vegetables" method="POST">
           Name: <input type="text" name="name" />
           <br />
@@ -19,5 +18,4 @@ class New extends React.Component {
     );
   }
 }
-
 module.exports = New;

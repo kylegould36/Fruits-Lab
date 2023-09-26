@@ -1,30 +1,42 @@
 const React = require("react");
+const DefaultLayout = require("../layouts/Default");
 
 class Index extends React.Component {
   render() {
     const { vegetables } = this.props;
     return (
-      <div>
-        <h1>Vegetables Index Page</h1>
+      <DefaultLayout title={"Vegetabls Index Page"}>
+        <nav>
+          <a href="/vegetables/new">Create a New Vegetable</a>
+        </nav>
         <ul>
           {vegetables.map((vegetable, i) => {
             return (
-              <li>
-                The <a href={`/vegetables/${i}`}>{vegetable.name}</a> is{" "}
-                {vegetable.color} <br></br>
-                {vegetable.readyToEat
-                  ? `It is ready to eat`
-                  : `It is not ready to eat`}
+              <li key={i}>
+                The{" "}
+                <a href={`/vegetables/${vegetable._id}`}>{vegetable.name}</a> is{" "}
+                {vegetable.color}
                 <br />
+                {vegetable.readyToEat
+                  ? `It is ready to eat. `
+                  : ` It is not ready to eat.`}
+                <br />
+                <form
+                  action={`/vegetables/${vegetable._id}?_method=DELETE`}
+                  method="POST"
+                >
+                  <input type="submit" value="DELETE" />
+                </form>
+                <a href={`/vegetables/${vegetable._id}/edit`}>
+                  Edit This vegetable
+                </a>
               </li>
             );
           })}
         </ul>
-        <nav>
-          <a href="/vegetables/new">Create a New Vegetable</a>
-        </nav>
-      </div>
+      </DefaultLayout>
     );
   }
 }
+
 module.exports = Index;
