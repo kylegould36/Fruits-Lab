@@ -27,6 +27,7 @@ app.set("view engine", "jsx");
 app.engine("jsx", jsxEngine());
 
 // Tell express to use the middleware
+app.use(express.static("public"));
 app.use(express.urlencoded({ extended: false }));
 
 /*
